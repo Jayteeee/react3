@@ -286,8 +286,7 @@ export default handleActions(
       }),
     [DELETE_POST]: (state, action) =>
       produce(state, (draft) => {
-        let idx = draft.list.findIndex((p) => p.id === action.payload.post_id);
-        console.log(state.list[idx])
+        draft.list = draft.list.filter((d) => d.id !== action.payload.post_id[0])
       })
   },
   initialState
