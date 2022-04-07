@@ -37,13 +37,13 @@ const PostList = (props) => {
                 {post_list.map((p, idx) => {
                     if(user_info && p.user_info.user_id === user_info.uid){
                         return(
-                            <Grid margin="8px 0px" bg="#fff" key = {p.id} _onClick={() => {history.push(`/post/${p.id}`)}}>
+                            <Grid margin="8px 0px" bg="#fff" key = {p.id}>
                                 <Post {...p} is_me/>
                             </Grid>
                         )   
                     }else{
                         return(
-                            <Grid bg="#fff" key={p.id} _onClick={() => {history.push(`/post/${p.id}`)}}>
+                            <Grid bg="#fff" key={p.id}>
                                 <Post {...p}/>
                             </Grid>
                         )

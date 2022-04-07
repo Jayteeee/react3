@@ -9,6 +9,7 @@ import { actionCreators as imageActions } from "./image";
 const SET_POST = "SET_POST";
 const ADD_POST = "ADD_POST";
 const EDIT_POST = "EDIT_POST";
+const DELETE_POST = "DELETE_POST"
 const LOADING = "LOADING";
 
 const setPost = createAction(SET_POST, (post_list, paging) => ({ post_list, paging }));
@@ -17,6 +18,7 @@ const editPost = createAction(EDIT_POST, (post_id, post) => ({
   post_id,
   post,
 }));
+const deletePost = createAction(DELETE_POST, (post_id) => ({post_id}))
 const loading = createAction(LOADING, (is_loading) => ({ is_loading }));
 
 const initialState = {
@@ -117,9 +119,6 @@ const addPostFB = (contents = "", layout = "center") => {
 
     const _image = getState().image.preview;
 
-    console.log(_image);
-    console.log(typeof _image);
-
     const _upload = storage
       .ref(`images/${user_info.user_id}_${new Date().getTime()}`)
       .putString(_image, "data_url");
@@ -128,7 +127,6 @@ const addPostFB = (contents = "", layout = "center") => {
       snapshot.ref
         .getDownloadURL()
         .then((url) => {
-          console.log(url);
 
           return url;
         })
@@ -216,8 +214,6 @@ const getOnePostFB = (id) => {
   return function(dispatch, getState, {history}){
     const postDB = firestore.collection("post")
         postDB.doc(id).get().then(doc => {
-            console.log(doc);
-            console.log(doc.data());
 
             let _post = doc.data();
             let post = Object.keys(_post).reduce(
@@ -237,6 +233,20 @@ const getOnePostFB = (id) => {
         })
   }
 }
+
+const deletePostFB = (id) => {
+  return function(dispatch, getState, {history}){
+    const postDB = firestore.collection("post");
+    postDB.doc(id).delete().then(() => {
+      window.alert('삭제 되었습니다!');
+      console.log("삭제 되었습니다!");
+  }).catch((error) => {
+      window.alert('삭제 도중 문제가 생겼습니다!')
+      console.error("삭제에 문제가 생겼습니다.", error);
+  });
+    dispatch(deletePost([id]))
+  }
+};
 
 export default handleActions(
   {
@@ -274,6 +284,11 @@ export default handleActions(
       produce(state, (draft) => {
         draft.is_loading = action.payload.is_loading;
       }),
+    [DELETE_POST]: (state, action) =>
+      produce(state, (draft) => {
+        let idx = draft.list.findIndex((p) => p.id === action.payload.post_id);
+        console.log(state.list[idx])
+      })
   },
   initialState
 );
@@ -282,10 +297,12 @@ const actionCreators = {
   setPost,
   addPost,
   editPost,
+  deletePost,
   getPostFB,
   addPostFB,
   editPostFB,
   getOnePostFB,
+  deletePostFB,
 };
 
 export { actionCreators };

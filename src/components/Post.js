@@ -2,8 +2,17 @@ import React from "react";
 import { Grid, Image, Text, Button } from "../elements";
 
 import {history} from "../redux/configureStore";
+import { useDispatch } from "react-redux";
+
+import { actionCreators as postActions } from "../redux/modules/post";
 
  const Post = (props) => {
+  const dispatch = useDispatch();
+
+  const deletePost = () => {
+    dispatch(postActions.deletePostFB(props.id));
+  };
+
   return (
     <React.Fragment>
       <Grid>
@@ -15,11 +24,16 @@ import {history} from "../redux/configureStore";
           <Grid is_flex width="auto">
             <Text>{props.insert_dt}</Text>
             {props.is_me && (
+              <Grid>
               <Button width="auto" margin="4px" padding="4px" _onClick={() => {
                 history.push(`/write/${props.id}`);
               }}>
                 수정
               </Button>
+              <Button width="auto" margin="4px" padding="4px" _onClick={deletePost}>
+                삭제
+              </Button>
+              </Grid>
             )}
           </Grid>
         </Grid>
@@ -53,9 +67,13 @@ import {history} from "../redux/configureStore";
           />
         </Grid>:null}
         <Grid padding="16px">
+          {history.location.pathname === "/"?
+            <Text margin="0px" bold  _onClick={() => {history.push(`/post/${props.id}`)}}>
+            댓글 {props.comment_cnt}개 모두보기
+          </Text> :
           <Text margin="0px" bold>
-            댓글 {props.comment_cnt}개
-          </Text>
+          댓글 {props.comment_cnt}개
+        </Text>}
         </Grid>
       </Grid>
     </React.Fragment>

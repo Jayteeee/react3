@@ -9,6 +9,7 @@ import { useSelector, useDispatch } from "react-redux";
 
 
 import { actionCreators as postActions } from "../redux/modules/post";
+
 const PostDetail = (props) => {
     const dispatch = useDispatch();
     const id = props.match.params.id;
