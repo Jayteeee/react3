@@ -26,7 +26,7 @@ const PostList = (props) => {
 
     return (
         <React.Fragment>
-            <Grid bg="#EFF6FF" padding="20px 0px">
+            <Grid padding="20px 0px">
             <InfinityScroll
             callNext= {() => {
                 dispatch(postActions.getPostFB(paging.next))

@@ -1,6 +1,5 @@
 import React from "react";
 import { Grid, Text, Button } from "../elements";
-import { getCookie, deleteCookie } from "../shared/Cookie";
 
 import { useSelector, useDispatch } from "react-redux";
 import { actionCreators as userActions } from "../redux/modules/user";
@@ -17,13 +16,11 @@ const Header = (props) => {
   const _session_key = `firebase:authUser:${apiKey}:[DEFAULT]`;
 
   const is_session = sessionStorage.getItem(_session_key)? true : false;
-  
-  console.log(is_session);
 
   if (is_login && is_session) {
     return (
       <React.Fragment>
-        <Grid is_flex padding="4px 16px">
+        <Grid is_flex padding="4px 16px" bg="#fff">
           <Grid _onClick={() => {history.push('/')}}>
             <Text margin="0px" size="24px" bold>
               헬로
@@ -49,8 +46,8 @@ const Header = (props) => {
 
   return (
     <React.Fragment>
-      <Grid is_flex padding="4px 16px">
-        <Grid>
+      <Grid is_flex padding="4px 16px" bg="#fff">
+        <Grid _onClick={() => {history.push('/')}}>
           <Text margin="0px" size="24px" bold>
             헬로
           </Text>

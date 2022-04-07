@@ -48,6 +48,8 @@ const addCommentFB = (post_id, contents) => {
 
       const post = getState().post.list.find((l) => l.id === post_id);
 
+      console.log(getState())
+
       const increment = firebase.firestore.FieldValue.increment(1);
 
       comment = { ...comment, id: doc.id };

@@ -21,6 +21,7 @@ import { useDispatch } from "react-redux";
 import { actionCreators as userActions } from "../redux/modules/user";
 
 import { apiKey } from "./firebase";
+import styled from "styled-components";
 
 function App() {
   const dispatch = useDispatch();
@@ -35,9 +36,9 @@ function App() {
   }, []);
 
   return (
-    <React.Fragment>
+    <Whole>
+      <Header></Header>
       <Grid>
-        <Header></Header>
         <ConnectedRouter history={history}>
           <Route path="/" exact component={PostList} />
           <Route path="/login" exact component={Login} />
@@ -58,8 +59,12 @@ function App() {
           }}
         ></Button>
       </Permit>
-    </React.Fragment>
+    </Whole>
   );
 }
+
+const Whole = styled.div`
+  background-color: #dedede;
+`
 
 export default App;

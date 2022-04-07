@@ -18,13 +18,12 @@ const NotiBadge = (props) => {
         const notiDB = realtime.ref(`noti/${user_id}`)
 
         notiDB.on("value", (snapshot) => {
-            console.log(snapshot.val());
 
             setIsRead(snapshot.val().read);
         })
 
         return () => notiDB.off();
-    }, [])
+    }, []);
 
     return (
         <React.Fragment>

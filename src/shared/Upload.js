@@ -1,7 +1,7 @@
 import React from "react";
 
-import {Button} from "../elements";
-import {storage} from "./firebase";
+// import {Button} from "../elements";
+// import {storage} from "./firebase";
 
 import {useDispatch, useSelector} from "react-redux";
 import {actionCreators as imageActions} from "../redux/modules/image";
@@ -12,11 +12,6 @@ const Upload = (props) => {
     const fileInput = React.useRef();
 
     const selectFile = (e) => {
-        console.log(e);
-        console.log(e.target);
-        console.log(e.target.files[0]);
-
-        console.log(fileInput.current.files[0]);
 
         const reader = new FileReader();
         const file = fileInput.current.files[0];
@@ -30,10 +25,10 @@ const Upload = (props) => {
 
     }
 
-    const uploadFB = () => {
-        let image = fileInput.current.files[0];
-        dispatch(imageActions.uploadImageFB(image));
-    }
+    // const uploadFB = () => {
+    //     let image = fileInput.current.files[0];
+    //     dispatch(imageActions.uploadImageFB(image));
+    // }
 
     return (
         <React.Fragment>

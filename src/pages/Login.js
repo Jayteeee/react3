@@ -39,7 +39,7 @@ const Login = (props) => {
         <Grid padding="16px 0px">
           <Input
             label="아이디"
-            placeholder="아이디를 입력해주세요."
+            placeholder="이메일 형식 아이디를 입력해주세요."
             _onChange={(e) => {
               setId(e.target.value);
             }}
@@ -49,7 +49,7 @@ const Login = (props) => {
         <Grid padding="16px 0px">
           <Input
             label="패스워드"
-            placeholder="패스워드 입력해주세요."
+            placeholder="패스워드 입력해주세요.(8글자 이상)"
             type="password"
             _onChange={(e) => {
               setPwd(e.target.value);
