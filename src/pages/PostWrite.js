@@ -30,6 +30,11 @@ const PostWrite = (props) => {
     if (is_edit) {
       dispatch(imageActions.setPreview(_post.image_url));
     }
+
+    return () => {
+      dispatch(imageActions.setPreview(null));
+    }
+
   }, []);
 
   const changeContents = (e) => {
