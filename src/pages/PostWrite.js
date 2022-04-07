@@ -105,10 +105,37 @@ const PostWrite = (props) => {
         <Text margin="0px" size="24px" bold>
             미리보기
         </Text>
+
+      {layout === "left"?
+      <Grid is_flex>
         <Image
-          shape="rectangle"
+          half
+          shape="big_squre"
           src={preview ? preview : "http://via.placeholder.com/400x300"}
         />
+        <Text margin = "10px">{contents}</Text>
+      </Grid>:null}
+      
+      {layout === "center"?
+      <Grid is_flex column width="50%">
+        <Text margin = "10px">{contents}</Text>
+        <Image
+          center
+          shape="big_squre"
+          src={preview ? preview : "http://via.placeholder.com/400x300"}
+        />
+      </Grid>:null}
+
+      {layout === "right"?
+        <Grid is_flex>
+          <Text margin = "10px">{contents}</Text>
+          <Image
+            half
+            shape="big_squre"
+            src={preview ? preview : "http://via.placeholder.com/400x300"}
+          />
+        </Grid>:null}
+
       </Grid>
 
       <Grid padding="16px">

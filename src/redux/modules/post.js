@@ -34,6 +34,7 @@ const initialPost = {
   image_url: "https://mean0images.s3.ap-northeast-2.amazonaws.com/4.jpeg",
   contents: "",
   comment_cnt: 0,
+  layout: "center",
   insert_dt: moment().format("YYYY-MM-DD hh:mm:ss"),
 };
 
@@ -95,7 +96,7 @@ const editPostFB = (post_id = null, post = {}) => {
   };
 };
 
-const addPostFB = (contents = "") => {
+const addPostFB = (contents = "", layout = "center") => {
   return function (dispatch, getState, { history }) {
     const postDB = firestore.collection("post");
 
@@ -109,6 +110,7 @@ const addPostFB = (contents = "") => {
 
     const _post = {
       ...initialPost,
+      layout,
       contents: contents,
       insert_dt: moment().format("YYYY-MM-DD hh:mm:ss"),
     };

@@ -23,12 +23,35 @@ import {history} from "../redux/configureStore";
             )}
           </Grid>
         </Grid>
-        <Grid padding="16px">
-          <Text>{props.contents}</Text>
-        </Grid>
-        <Grid>
-          <Image shape="rectangle" src={props.image_url} />
-        </Grid>
+        {props.layout === "left"?
+      <Grid is_flex>
+        <Image
+          half
+          shape="big_squre"
+          src={props.image_url}
+        />
+        <Text margin = "10px">{props.contents}</Text>
+      </Grid>:null}
+      
+      {props.layout === "center"?
+      <Grid is_flex column width="50%">
+        <Text margin = "10px">{props.contents}</Text>
+        <Image
+          center
+          shape="big_squre"
+          src={props.image_url}
+        />
+      </Grid>:null}
+
+      {props.layout === "right"?
+        <Grid is_flex>
+          <Text margin = "10px">{props.contents}</Text>
+          <Image
+            half
+            shape="big_squre"
+            src={props.image_url}
+          />
+        </Grid>:null}
         <Grid padding="16px">
           <Text margin="0px" bold>
             댓글 {props.comment_cnt}개

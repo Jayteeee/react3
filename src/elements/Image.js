@@ -2,12 +2,13 @@ import styled from 'styled-components';
 import React from "react";
 
 const Image = (props) => {
-    const {shape, src, size, half} = props;
+    const {shape, src, size, half, center} = props;
 
     const styles = {
         src: src,
         size: size,
         half,
+        center,
     }
 
     if(shape === "circle"){
@@ -79,6 +80,7 @@ const ImageCircle = styled.div`
 const BigSquareImage = styled.img`
   width: 100%;
   ${(props) => (props.half ? `flex-basis: 50%;` : "")}
+  ${(props) => (props.center ? `flex-basis: 50%;` : "")}
   min-width: 250px;
   background-image: url(${(props) => props.src});
   background-size: cover;
